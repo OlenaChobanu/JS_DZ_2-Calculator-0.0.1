@@ -1,7 +1,7 @@
-// while(true) {
-//     calculator();
-// }
-calculator();
+while(true) {
+    calculator();
+}
+// calculator();
 function calculator() {
 
     function askUserForInitialData(message) {
@@ -22,18 +22,18 @@ function calculator() {
     }
 
     const operand1 = +askUserForInitialData('Enter operand1 (any number):');
-    const operand2 = +askUserForInitialData('Enter operand2 (any number):');
-    // if(!checkIfOperandsAreValid(operand1, operand2)) {
-    //     showPopup('Please enter valid operands: any numbers');
-    // return;
-    // }
 
-    
-    // function checkIfOperandsAreValid(operand1, operand2) {
-    //     return (
-    //         typeof operand1 === typeof 1 && typeof operand2 === typeof 1
-    //     );
-    // }
+    if(!checkIfOperandIsValid(operand1)) {
+        showPopup('Please enter valid operand1: any number');
+        return;
+    }
+
+    const operand2 = +askUserForInitialData('Enter operand2 (any number):');
+
+    if(checkIfSecondOperandIsZeroOnDivision(operator, operand2)) {
+        showPopup('Cannot divide by zero');
+        return;
+    }
 
     function checkIfSecondOperandIsZeroOnDivision(operator, operand2) {
         return (
@@ -41,9 +41,15 @@ function calculator() {
         );
     }
 
-    if(checkIfSecondOperandIsZeroOnDivision(operator, operand2)) {
-        showPopup('Cannot divide by zero');
+    if(!checkIfOperandIsValid(operand2)) {
+        showPopup('Please enter valid operand2: any number');
         return;
+    }
+    
+    function checkIfOperandIsValid(operand) {
+        return (
+            !isNaN(operand) && operand !== 0
+        );
     }
 
     let result;
